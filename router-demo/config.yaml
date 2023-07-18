@@ -1,0 +1,12 @@
+supergraph:
+  listen: 0.0.0.0:8080
+coprocessor:
+  # ↓crushes one
+  # url: http://localhost:8000/stringified-valid-json
+  # ↓500 with 'router service call failed'
+  url: http://localhost:8000/valid-json
+  timeout: 5s
+  router: # This coprocessor hooks into the `RouterService`
+    request: # By including this key, the `RouterService` sends a coprocessor request whenever it first receives a client request.
+      headers: true
+      body: true
